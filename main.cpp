@@ -33,7 +33,6 @@ int main()
         break;
 
     default:
-        cout << "Numero invalido\n";
         break;
     }
     return 0;
