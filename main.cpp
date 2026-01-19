@@ -3,6 +3,7 @@ using namespace std;
 
 int main()
 {
+    cout << "Indique seu numero:\n";
     int num;
     cin >> num;
 
@@ -32,6 +33,7 @@ int main()
         break;
 
     default:
+        cout << "Numero invalido\n";
         break;
     }
     return 0;
