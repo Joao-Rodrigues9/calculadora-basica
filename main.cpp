@@ -37,10 +37,10 @@ int main()
 void calculadora()
 {
 
-    double valor = iniciarCalc();
+    double valor = 0;
+    int count = 0;
 
     printarMenuCalc(valor);
-
     char escolha;
 
     while (true)
@@ -50,6 +50,11 @@ void calculadora()
         switch (escolha)
         {
         case '+':
+            if (count == 0)
+            {
+                valor = iniciarCalc();
+                count++;
+            }
             double somador;
             std::cout << "Somar quanto?\n";
             std::cin >> somador;
@@ -59,6 +64,11 @@ void calculadora()
             break;
 
         case '-':
+            if (count == 0)
+            {
+                valor = iniciarCalc();
+                count++;
+            }
             double subtrador;
             std::cout << "Subtrair quanto?\n";
             std::cin >> subtrador;
@@ -68,6 +78,11 @@ void calculadora()
             break;
 
         case '*':
+            if (count == 0)
+            {
+                valor = iniciarCalc();
+                count++;
+            }
             double multiplicador;
             std::cout << "Multiplicar por quanto?\n";
             std::cin >> multiplicador;
@@ -75,7 +90,13 @@ void calculadora()
             valor = valor * multiplicador;
             printarMenuCalc(valor);
             break;
+
         case '/':
+            if (count == 0)
+            {
+                valor = iniciarCalc();
+                count++;
+            }
             double divisor;
             std::cout << "Dividir por quanto?\n";
             std::cin >> divisor;
@@ -109,14 +130,13 @@ void printarMenuCalc(double valorAtual)
 {
     std::cout << "-------------------------------\n"
               << "E -> Retornar ao menu principal\n"
-              << "+ -> Somar ao numero\n"
-              << "- -> Subtrair do numero\n"
-              << "* -> Multiplicar o numero\n"
-              << "/ -> Dividir o numero\n"
+              << "+ -> Adicao\n"
+              << "- -> Subtracao\n"
+              << "* -> Multiplicacao\n"
+              << "/ -> Divisao\n"
               << "-------------------------------\n"
               << "Valor atual: " << valorAtual << "\n"
-              << "-------------------------------\n"
-              << "O que deseja fazer?\n";
+              << "-------------------------------\n";
 }
 
 void converterTemperatura()
