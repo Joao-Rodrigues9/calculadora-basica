@@ -41,6 +41,7 @@ void calculadora()
     int count = 0;
 
     printarMenuCalc(valor);
+
     char escolha;
 
     while (true)
@@ -83,6 +84,7 @@ void calculadora()
                 valor = iniciarCalc();
                 count++;
             }
+
             double multiplicador;
             std::cout << "Multiplicar por quanto?\n";
             std::cin >> multiplicador;
@@ -97,6 +99,7 @@ void calculadora()
                 valor = iniciarCalc();
                 count++;
             }
+
             double divisor;
             std::cout << "Dividir por quanto?\n";
             std::cin >> divisor;
