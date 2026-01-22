@@ -30,6 +30,10 @@ int main()
 
     case 0:
         break;
+
+    default:
+        std::cout << "Invalido\n";
+        main();
     }
     return 0;
 }
