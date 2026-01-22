@@ -37,8 +37,7 @@ int main()
 void calculadora()
 {
 
-    double valor = 0;
-    int count = 0;
+    double valor = iniciarCalc();
 
     printarMenuCalc(valor);
 
@@ -51,11 +50,6 @@ void calculadora()
         switch (escolha)
         {
         case '+':
-            if (count == 0)
-            {
-                valor = iniciarCalc();
-                count++;
-            }
             double somador;
             std::cout << "Somar quanto?\n";
             std::cin >> somador;
@@ -65,11 +59,6 @@ void calculadora()
             break;
 
         case '-':
-            if (count == 0)
-            {
-                valor = iniciarCalc();
-                count++;
-            }
             double subtrador;
             std::cout << "Subtrair quanto?\n";
             std::cin >> subtrador;
@@ -79,12 +68,6 @@ void calculadora()
             break;
 
         case '*':
-            if (count == 0)
-            {
-                valor = iniciarCalc();
-                count++;
-            }
-
             double multiplicador;
             std::cout << "Multiplicar por quanto?\n";
             std::cin >> multiplicador;
@@ -94,12 +77,6 @@ void calculadora()
             break;
 
         case '/':
-            if (count == 0)
-            {
-                valor = iniciarCalc();
-                count++;
-            }
-
             double divisor;
             std::cout << "Dividir por quanto?\n";
             std::cin >> divisor;
