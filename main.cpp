@@ -7,7 +7,9 @@ void converterTemperatura();
 
 int main()
 {
-    std::cout << "0- Encerrar programa\n"
+
+    std::cout << "--------------------\n"
+              << "0- Encerrar programa\n"
               << "1- Calculadora\n"
               << "2- Conversor de Temperatura\n"
               << "--------------------\n"
@@ -83,7 +85,6 @@ void calculadora()
             break;
 
         case 'E':
-            std::cout << "--------------------\n";
             main();
             break;
 
@@ -170,7 +171,6 @@ void converterTemperatura()
             break;
 
         case 0:
-            std::cout << "--------------------\n ";
             main();
             break;
 
@@ -211,7 +211,7 @@ void converterTemperatura()
         }
         else if (tipoAtual == 'K' && tipoDesejado == 'F')
         {
-            temperatura = (temperatura - 273.15) * (9 / 5) + 32;
+            temperatura = (temperatura - 273.15) * 9 / 5 + 32;
             std::cout << temperatura << " graus " << tipoDesejado << "\n";
         }
     }
