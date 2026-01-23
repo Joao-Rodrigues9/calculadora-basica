@@ -19,7 +19,7 @@ int main()
 
         std::cin >> escolha;
 
-        if (std::cin.fail()) // caso entrem com algo que não seja int
+        if (std::cin.fail()) // caso insiram algo que não seja int
         {
             std::cout << "Invalido\n";
             std::cin.clear();
@@ -116,7 +116,7 @@ double iniciarCalc()
     double num;
     std::cin >> num;
 
-    if (std::cin.fail()) // caso entrem com algo que não seja double
+    if (std::cin.fail()) // caso insiram algo que não seja double
     {
         std::cout << "Invalido, iniciando valor como 0\n";
         std::cin.clear();
@@ -160,7 +160,7 @@ void converterTemperatura()
 
         std::cin >> escolha;
 
-        if (std::cin.fail()) // caso entrem com algo que não seja int
+        if (std::cin.fail()) // caso insiram algo que não seja int
         {
             std::cout << "Invalido\n";
             std::cin.clear();
@@ -211,7 +211,7 @@ void converterTemperatura()
         std::cout << "Informe a temperatura de entrada: ";
         std::cin >> temperatura;
 
-        if (std::cin.fail()) // caso entrem com algo que não seja double
+        if (std::cin.fail()) // caso insiram algo que não seja double
         {
             std::cout << "Invalido\n";
             std::cin.clear();
