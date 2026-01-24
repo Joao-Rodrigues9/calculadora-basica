@@ -299,7 +299,10 @@ void partidaVinteUm()
         K = 10
     };
 
-    int cartaJogador, cartaPc;
+    int cartaJogador, cartaPC;
+    bool EspecialPresenteJog = false;
+    bool EspecialPresentePc = false;
+    char letrasEspecias[] = {'Q', 'J', 'K'};
 
     srand(time(0));
 
@@ -310,8 +313,23 @@ void partidaVinteUm()
         int chanceEspecial = rand() % 4 + 1;
         if (chanceEspecial != 1)
         {
-            char letrasEspecias[] = {'Q', 'J', 'K'};
-            char qualLetra = rand() % 3;
+            EspecialPresenteJog = true;
+            char qualLetraJog = letrasEspecias[rand() % 3];
         }
     }
+
+    cartaPC = rand() % 10 + 1;
+
+    if (cartaPC == 10)
+    {
+        int chanceEspecial = rand() % 4 + 1;
+        if (chanceEspecial != 1)
+        {
+            EspecialPresenteJog = true;
+            char qualLetraPC = letrasEspecias[rand() % 3];
+        }
+    }
+
+    std::cout << "Sua cartas: " << cartaJogador << "\n";
+    std::cout << "As cartas da casa: " << cartaPC << "\n";
 }
