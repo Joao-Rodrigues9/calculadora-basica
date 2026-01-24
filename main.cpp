@@ -1,9 +1,12 @@
 #include <iostream>
+#include <ctime>
 
 void calculadora();
 double iniciarCalc();
 void printarMenuCalc(double valorAtual);
 void converterTemperatura();
+void jogoVinteUm();
+void partidaVinteUm();
 
 int main()
 {
@@ -14,6 +17,7 @@ int main()
                   << "0- Encerrar programa\n"
                   << "1- Calculadora\n"
                   << "2- Conversor de Temperatura\n"
+                  << "3- Jogo Vinte Um\n"
                   << "--------------------\n"
                   << "O que deseja fazer?\n";
 
@@ -35,6 +39,10 @@ int main()
 
         case 2:
             converterTemperatura();
+            break;
+
+        case 3:
+            jogoVinteUm();
             break;
 
         case 0:
@@ -243,4 +251,67 @@ void converterTemperatura()
         }
 
     } while (true);
+}
+
+void jogoVinteUm()
+{
+    std::cout << "-------------------------------\n"
+              << "O que deseja fazer?\n"
+              << "0- Retonar ao menu principal\n"
+              << "1- Jogar\n"
+              << "-------------------------------\n";
+
+    int escolha;
+
+    do
+    {
+        std::cin >> escolha;
+
+        if (std::cin.fail())
+        {
+            std::cout << "Invalido";
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            continue;
+        }
+
+        switch (escolha)
+        {
+        case 0:
+            return;
+        case 1:
+            partidaVinteUm();
+            break;
+        default:
+            std::cout << "Invalido";
+            continue;
+        }
+
+    } while (true);
+}
+
+void partidaVinteUm()
+{
+    enum cartasEspeciais
+    {
+        Q = 10,
+        J = 10,
+        K = 10
+    };
+
+    int cartaJogador, cartaPc;
+
+    srand(time(0));
+
+    cartaJogador = rand() % 10 + 1;
+
+    if (cartaJogador == 10)
+    {
+        int chanceEspecial = rand() % 4 + 1;
+        if (chanceEspecial != 1)
+        {
+            char letrasEspecias[] = {'Q', 'J', 'K'};
+            char qualLetra = rand() % 3;
+        }
+    }
 }
