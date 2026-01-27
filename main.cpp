@@ -26,7 +26,6 @@ int main()
 
         if (std::cin.fail()) // caso insiram algo que não seja int
         {
-            std::cout << "Invalido\n";
             std::cin.clear();
             std::cin.ignore(1000, '\n');
             continue;
@@ -50,7 +49,6 @@ int main()
             return 0;
 
         default:
-            std::cout << "Invalido\n";
             continue;
         }
 
@@ -111,7 +109,6 @@ void calculadora()
             return;
 
         default:
-            std::cout << "Invalido\n";
             printarMenuCalc(valor);
             continue;
         }
@@ -169,7 +166,6 @@ void converterTemperatura()
 
         if (std::cin.fail())
         {
-            std::cout << "Invalido\n";
             std::cin.clear();
             std::cin.ignore(1000, '\n');
             continue;
@@ -205,7 +201,6 @@ void converterTemperatura()
             return;
 
         default:
-            std::cout << "Invalido\n";
             continue;
         }
 
@@ -214,7 +209,6 @@ void converterTemperatura()
 
         if (std::cin.fail())
         {
-            std::cout << "Invalido\n";
             std::cin.clear();
             std::cin.ignore(1000, '\n');
             continue;
@@ -271,7 +265,6 @@ void jogoVinteUm()
 
         if (std::cin.fail())
         {
-            std::cout << "Invalido\n";
             std::cin.clear();
             std::cin.ignore(1000, '\n');
             continue;
@@ -285,7 +278,6 @@ void jogoVinteUm()
             partidaVinteUm();
             break;
         default:
-            std::cout << "Invalido\n";
             continue;
         }
 
@@ -353,7 +345,6 @@ void partidaVinteUm()
 
         if (std::cin.fail())
         {
-            std::cout << "Invalido\n";
             std::cin.clear();
             std::cin.ignore(1000, '\n');
             continue;
@@ -384,8 +375,6 @@ void partidaVinteUm()
 
             else
             {
-                std::cout << "Invalido\n"
-                          << "-------------------------------\n";
                 continue;
             }
         }
