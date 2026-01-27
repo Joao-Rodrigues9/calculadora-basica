@@ -107,7 +107,7 @@ void calculadora()
             printarMenuCalc(valor);
             break;
 
-        case 'E':
+        case '0':
             return;
 
         default:
@@ -137,7 +137,7 @@ double iniciarCalc()
 void printarMenuCalc(double valorAtual)
 {
     std::cout << "-------------------------------\n"
-              << "E -> Retornar ao menu principal\n"
+              << "0 -> Retornar ao menu principal\n"
               << "+ -> Adicao\n"
               << "- -> Subtracao\n"
               << "* -> Multiplicacao\n"
@@ -256,21 +256,22 @@ void converterTemperatura()
 
 void jogoVinteUm()
 {
-    std::cout << "-------------------------------\n"
-              << "O que deseja fazer?\n"
-              << "1- Jogar\n"
-              << "0- Retonar ao menu principal\n"
-              << "-------------------------------\n";
 
     int escolha;
 
     do
     {
+        std::cout << "-------------------------------\n"
+                  << "O que deseja fazer?\n"
+                  << "1- Jogar\n"
+                  << "0- Retonar ao menu principal\n"
+                  << "-------------------------------\n";
+
         std::cin >> escolha;
 
         if (std::cin.fail())
         {
-            std::cout << "Invalido";
+            std::cout << "Invalido\n";
             std::cin.clear();
             std::cin.ignore(1000, '\n');
             continue;
@@ -284,7 +285,7 @@ void jogoVinteUm()
             partidaVinteUm();
             break;
         default:
-            std::cout << "Invalido";
+            std::cout << "Invalido\n";
             continue;
         }
 
@@ -305,35 +306,88 @@ void partidaVinteUm()
         cartaJogador = rand() % 10 + 1;
         deckJogador.push_back(cartaJogador);
 
-        if (somaPC < 17)
+        if (somaPC <= 16)
         {
             cartaPC = rand() % 10 + 1;
             deckPC.push_back(cartaPC);
         }
 
-        cartaPC = rand() % 10 + 1;
-        deckPC.push_back(cartaPC);
+        if (deckPC.size() == 1)
+        {
+            cartaPC = rand() % 10 + 1;
+            deckPC.push_back(cartaPC);
+        }
 
-        std::cout << "Sua cartas: ";
-        for (int i = 0; i < deckJogador.size(); i++)
+        std::cout << "Suas cartas: ";
+
+        soma = 0;
+        for (size_t i = 0; i < deckJogador.size(); i++)
         {
             std::cout << deckJogador[i] << " ";
-            soma = soma + deckJogador[i];
+            soma += deckJogador[i];
         }
         std::cout << "\n";
         std::cout << "Soma: " << soma << "\n\n";
 
-        std::cout << "As cartas da casa: " << deckPC[0] << 'X\n\n';
+        std::cout << "Cartas do oponente: " << deckPC[0] << " ? ? ?\n"
+                  << "-------------------------------\n";
 
-        std::cout << "Deseja comprar mais uma carta?\n"
+        if (soma > 21)
+        {
+            std::cout << "Jogador: " << soma << "   " << "PC: " << somaPC << '\n';
+            std::cout << "Perdeu!\n";
+            return;
+        }
+
+        somaPC = 0;
+        for (size_t i = 0; i < deckPC.size(); i++)
+        {
+            somaPC += deckPC[i];
+        }
+
+        std::cout << "Deseja pegar mais uma carta?\n"
                   << "1 - Sim     " << "0 - Nao\n";
 
         int escolha;
         std::cin >> escolha;
 
+        if (std::cin.fail())
+        {
+            std::cout << "Invalido\n";
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            continue;
+        }
+
         if (escolha == 0)
         {
-            break;
+            if (soma > 21 || (somaPC <= 21 && somaPC > soma))
+            {
+                std::cout << "Jogador: " << soma << "   " << "PC: " << somaPC << '\n';
+                std::cout << "Perdeu!\n";
+                return;
+            }
+
+            else if (soma == somaPC)
+            {
+                std::cout << "Jogador: " << soma << "   " << "PC: " << somaPC << '\n';
+                std::cout << "Empate!\n";
+                return;
+            }
+
+            else if (soma <= 21 && soma > somaPC)
+            {
+                std::cout << "Jogador: " << soma << "   " << "PC: " << somaPC << '\n';
+                std::cout << "Ganhou!\n";
+                return;
+            }
+
+            else
+            {
+                std::cout << "Invalido\n"
+                          << "-------------------------------\n";
+                continue;
+            }
         }
     } while (true);
 }
