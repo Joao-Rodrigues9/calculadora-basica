@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <vector>
 
 void calculadora();
 double iniciarCalc();
@@ -257,8 +258,8 @@ void jogoVinteUm()
 {
     std::cout << "-------------------------------\n"
               << "O que deseja fazer?\n"
-              << "0- Retonar ao menu principal\n"
               << "1- Jogar\n"
+              << "0- Retonar ao menu principal\n"
               << "-------------------------------\n";
 
     int escolha;
@@ -294,13 +295,45 @@ void partidaVinteUm()
 {
 
     int cartaJogador, cartaPC;
-
+    std::vector<int> deckJogador, deckPC;
+    int soma = 0, somaPC = 0;
     srand(time(0));
 
-    cartaJogador = rand() % 10 + 1;
+    do
+    {
 
-    cartaPC = rand() % 10 + 1;
+        cartaJogador = rand() % 10 + 1;
+        deckJogador.push_back(cartaJogador);
 
-    std::cout << "Sua cartas: " << cartaJogador << "\n";
-    std::cout << "As cartas da casa: " << cartaPC << "\n";
+        if (somaPC < 17)
+        {
+            cartaPC = rand() % 10 + 1;
+            deckPC.push_back(cartaPC);
+        }
+
+        cartaPC = rand() % 10 + 1;
+        deckPC.push_back(cartaPC);
+
+        std::cout << "Sua cartas: ";
+        for (int i = 0; i < deckJogador.size(); i++)
+        {
+            std::cout << deckJogador[i] << " ";
+            soma = soma + deckJogador[i];
+        }
+        std::cout << "\n";
+        std::cout << "Soma: " << soma << "\n\n";
+
+        std::cout << "As cartas da casa: " << deckPC[0] << 'X\n\n';
+
+        std::cout << "Deseja comprar mais uma carta?\n"
+                  << "1 - Sim     " << "0 - Nao\n";
+
+        int escolha;
+        std::cin >> escolha;
+
+        if (escolha == 0)
+        {
+            break;
+        }
+    } while (true);
 }
