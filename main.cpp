@@ -352,21 +352,21 @@ void partidaVinteUm()
 
         if (escolha == 0)
         {
-            if (soma > 21 || (somaPC <= 21 && somaPC > soma))
+            if (soma > 21 || (soma <= 21 && somaPC <= 21 && somaPC > soma))
             {
                 std::cout << "Jogador: " << soma << "   " << "PC: " << somaPC << '\n';
                 std::cout << "Perdeu!\n";
                 return;
             }
 
-            else if (soma == somaPC)
+            else if (soma == somaPC && soma <= 21 && somaPC <= 21)
             {
                 std::cout << "Jogador: " << soma << "   " << "PC: " << somaPC << '\n';
                 std::cout << "Empate!\n";
                 return;
             }
 
-            else if (soma <= 21 && soma > somaPC)
+            else if ((soma <= 21 && somaPC <= 21 && soma > somaPC) || (soma <= 21 && somaPC > 21))
             {
                 std::cout << "Jogador: " << soma << "   " << "PC: " << somaPC << '\n';
                 std::cout << "Ganhou!\n";
@@ -375,7 +375,7 @@ void partidaVinteUm()
 
             else
             {
-                continue;
+                break;
             }
         }
     } while (true);
