@@ -15,10 +15,10 @@ int main()
     do
     {
         std::cout << "--------------------\n"
-                  << "0- Encerrar programa\n"
-                  << "1- Calculadora\n"
-                  << "2- Conversor de Temperatura\n"
-                  << "3- Jogo Vinte Um\n"
+                  << "[0] - Encerrar programa\n"
+                  << "[1] - Calculadora\n"
+                  << "[2] - Conversor de Temperatura\n"
+                  << "[3] - Jogo Vinte Um\n"
                   << "--------------------\n"
                   << "O que deseja fazer?\n";
 
@@ -134,11 +134,11 @@ double iniciarCalc()
 void printarMenuCalc(double valorAtual)
 {
     std::cout << "-------------------------------\n"
-              << "0 -> Retornar ao menu principal\n"
-              << "+ -> Adicao\n"
-              << "- -> Subtracao\n"
-              << "* -> Multiplicacao\n"
-              << "/ -> Divisao\n"
+              << "[0] - Retornar ao menu principal\n"
+              << "[+] - Adicao\n"
+              << "[-] - Subtracao\n"
+              << "[*] - Multiplicacao\n"
+              << "[/] - Divisao\n"
               << "-------------------------------\n"
               << "Valor atual: " << valorAtual << "\n"
               << "-------------------------------\n";
@@ -153,13 +153,13 @@ void converterTemperatura()
     do
     {
         std::cout << "-------------------------------\n"
-                  << "0- Retonar ao menu principal\n"
-                  << "1- Celsius para Fahrenheit\n"
-                  << "2- Celsius para Kelvin\n"
-                  << "3- Fahrenheit para Celsius\n"
-                  << "4- Fahrenheit para Kelvin\n"
-                  << "5- Kelvin para Celsius\n"
-                  << "6- Kelvin para Fahrenheit\n"
+                  << "[0] - Retonar ao menu principal\n"
+                  << "[1] - Celsius para Fahrenheit\n"
+                  << "[2] - Celsius para Kelvin\n"
+                  << "[3] - Fahrenheit para Celsius\n"
+                  << "[4] - Fahrenheit para Kelvin\n"
+                  << "[5] - Kelvin para Celsius\n"
+                  << "[6] - Kelvin para Fahrenheit\n"
                   << "-------------------------------\n";
 
         std::cin >> escolha;
@@ -257,8 +257,8 @@ void jogoVinteUm()
     {
         std::cout << "-------------------------------\n"
                   << "O que deseja fazer?\n"
-                  << "1- Jogar\n"
-                  << "0- Retonar ao menu principal\n"
+                  << "[1] - Jogar\n"
+                  << "[0] - Retonar ao menu principal\n"
                   << "-------------------------------\n";
 
         std::cin >> escolha;
@@ -290,46 +290,59 @@ void partidaVinteUm()
     int cartaJogador, cartaPC;
     std::vector<int> deckJogador, deckPC;
     int soma = 0, somaPC = 0;
+    bool enabler = true; // caso o usuario erroneamente insira um char na escolha, vai pra falso e não add mais cartas ao deck do jogador
     srand(time(0));
 
     do
     {
-
-        cartaJogador = rand() % 10 + 1;
-        deckJogador.push_back(cartaJogador);
-
-        if (somaPC <= 16)
+        if (enabler == true)
         {
-            cartaPC = rand() % 10 + 1;
-            deckPC.push_back(cartaPC);
+            cartaJogador = rand() % 10 + 1;
+            deckJogador.push_back(cartaJogador);
+
+            if (deckJogador.size() == 1)
+            {
+                cartaJogador = rand() % 10 + 1;
+                deckJogador.push_back(cartaJogador);
+            }
+
+            if (deckPC.size() == 0)
+            {
+                cartaPC = rand() % 10 + 1;
+                deckPC.push_back(cartaPC);
+
+                cartaPC = rand() % 10 + 1;
+                deckPC.push_back(cartaPC);
+            }
         }
 
-        if (deckPC.size() == 1)
-        {
-            cartaPC = rand() % 10 + 1;
-            deckPC.push_back(cartaPC);
-        }
+        enabler = true;
 
-        std::cout << "Suas cartas: ";
+        std::cout << "-------------------------------\n";
+        std::cout << "Suas cartas:";
 
         soma = 0;
         for (size_t i = 0; i < deckJogador.size(); i++)
         {
-            std::cout << deckJogador[i] << " ";
+            std::cout << "[" << deckJogador[i] << "] ";
             soma += deckJogador[i];
         }
+
         std::cout << "\n";
         std::cout << "Soma: " << soma << "\n\n";
 
-        std::cout << "Cartas do oponente: " << deckPC[0] << " ? ? ?\n"
+        std::cout << "Cartas do oponente: [" << deckPC[0] << "] ? ? ?\n"
                   << "-------------------------------\n";
 
         if (soma > 21)
         {
-            std::cout << "Jogador: " << soma << "   " << "PC: " << somaPC << '\n';
+            std::cout << "Jogador: " << soma << "  " << "PC: " << somaPC << '\n';
             std::cout << "Perdeu!\n";
             return;
         }
+
+        std::cout << "Deseja pegar mais uma carta?\n"
+                  << "[1] - Sim     " << "[0] - Nao\n";
 
         somaPC = 0;
         for (size_t i = 0; i < deckPC.size(); i++)
@@ -337,8 +350,12 @@ void partidaVinteUm()
             somaPC += deckPC[i];
         }
 
-        std::cout << "Deseja pegar mais uma carta?\n"
-                  << "1 - Sim     " << "0 - Nao\n";
+        while (somaPC <= 16)
+        {
+            cartaPC = rand() % 10 + 1;
+            deckPC.push_back(cartaPC);
+            somaPC += cartaPC;
+        }
 
         int escolha;
         std::cin >> escolha;
@@ -347,6 +364,7 @@ void partidaVinteUm()
         {
             std::cin.clear();
             std::cin.ignore(1000, '\n');
+            enabler = false;
             continue;
         }
 
@@ -372,11 +390,15 @@ void partidaVinteUm()
                 std::cout << "Ganhou!\n";
                 return;
             }
-
-            else
-            {
-                break;
-            }
+        }
+        else if (escolha == 1)
+        {
+            continue;
+        }
+        else
+        {
+            enabler = false;
+            continue;
         }
     } while (true);
 }
