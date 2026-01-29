@@ -494,7 +494,7 @@ void controleDeGastos()
             {
                 gastoTotal += gasto.valor;
             }
-            std::cout << "\nTotal em gastos: " << gastoTotal << '\n';
+            std::cout << "Total em gastos: " << gastoTotal << '\n';
             break;
         }
         }
@@ -507,7 +507,7 @@ Gasto registrarGasto(int id)
     Gasto novoGasto;
 
     novoGasto.id = id;
-    std::cout << "\nInsira a descricao: ";
+    std::cout << "Insira a descricao: ";
     std::cin.ignore(1000, '\n');
     std::getline(std::cin, novoGasto.descricao);
     std::cout << "Insira o valor: ";
@@ -520,7 +520,7 @@ void listarGastos(const std::vector<Gasto> &listaGasto)
 {
     for (const Gasto &gasto : listaGasto)
     {
-        std::cout << "\nId: " << gasto.id << '\n'
+        std::cout << "Id: " << gasto.id << '\n'
                   << "Descricao: " << gasto.descricao << '\n'
                   << "Valor: " << gasto.valor << "\n\n";
     }
