@@ -4,7 +4,7 @@
 
 void calculadora();
 double iniciarCalc();
-void printarMenuCalc(double valorAtual);
+void printarMenuCalc(const double &valorAtual);
 void converterTemperatura();
 void jogoVinteUm();
 void partidaVinteUm();
@@ -137,7 +137,7 @@ double iniciarCalc()
     return num;
 }
 
-void printarMenuCalc(double valorAtual)
+void printarMenuCalc(const double &valorAtual)
 {
     std::cout << "-------------------------------\n"
               << "[+] - Adicao\n"
