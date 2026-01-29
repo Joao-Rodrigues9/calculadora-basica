@@ -518,6 +518,7 @@ Gasto registrarGasto(int id)
 
 void listarGastos(const std::vector<Gasto> &listaGasto)
 {
+    std::cout << "\n";
     for (const Gasto &gasto : listaGasto)
     {
         std::cout << "Id: " << gasto.id << '\n'
