@@ -8,6 +8,7 @@ void printarMenuCalc(double valorAtual);
 void converterTemperatura();
 void jogoVinteUm();
 void partidaVinteUm();
+void controleDeGastos();
 
 int main()
 {
@@ -19,6 +20,7 @@ int main()
                   << "[1] - Calculadora\n"
                   << "[2] - Conversor de Temperatura\n"
                   << "[3] - Jogo Vinte Um\n"
+                  << "[4] - Controle de Gastos"
                   << "--------------------\n"
                   << "O que deseja fazer?\n";
 
@@ -43,6 +45,10 @@ int main()
 
         case 3:
             jogoVinteUm();
+            break;
+
+        case 4:
+            controleDeGastos();
             break;
 
         case 0:
@@ -134,11 +140,11 @@ double iniciarCalc()
 void printarMenuCalc(double valorAtual)
 {
     std::cout << "-------------------------------\n"
-              << "[0] - Retornar ao menu principal\n"
               << "[+] - Adicao\n"
               << "[-] - Subtracao\n"
               << "[*] - Multiplicacao\n"
               << "[/] - Divisao\n"
+              << "[0] - Retornar ao menu principal\n"
               << "-------------------------------\n"
               << "Valor atual: " << valorAtual << "\n"
               << "-------------------------------\n";
@@ -153,13 +159,13 @@ void converterTemperatura()
     do
     {
         std::cout << "-------------------------------\n"
-                  << "[0] - Retonar ao menu principal\n"
                   << "[1] - Celsius para Fahrenheit\n"
                   << "[2] - Celsius para Kelvin\n"
                   << "[3] - Fahrenheit para Celsius\n"
                   << "[4] - Fahrenheit para Kelvin\n"
                   << "[5] - Kelvin para Celsius\n"
                   << "[6] - Kelvin para Fahrenheit\n"
+                  << "[0] - Retonar ao menu principal\n"
                   << "-------------------------------\n";
 
         std::cin >> escolha;
@@ -426,4 +432,72 @@ void partidaVinteUm()
             continue;
         }
     } while (true);
+}
+
+struct Gasto
+{
+    int id;
+    std::string descricao;
+    double valor;
+};
+
+Gasto registrarGasto(int id);
+void listarGastos(const std::vector<Gasto> &listaGasto);
+
+void controleDeGastos()
+{
+    int idGasto = 0;
+    std::vector<Gasto> listaGasto;
+
+    do
+    {
+        std::cout << "-------------------------------\n"
+                  << "O que deseja fazer?\n"
+                  << "[1] - Registrar gasto\n"
+                  << "[2] - Listas gastos\n"
+                  << "[3] - Total gasto\n"
+                  << "[4] - Remover gasto\n"
+                  << "[0] - Retonar ao menu principal\n"
+                  << "-------------------------------\n";
+
+        int escolha;
+        std::cin >> escolha;
+
+        if (std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            continue;
+        }
+
+        switch (escolha)
+        {
+        case 1:
+            Gasto temp = registrarGasto(idGasto);
+            listaGasto.push_back(temp);
+            idGasto++;
+
+        case 2:
+        }
+
+    } while (true);
+}
+
+Gasto registrarGasto(int id)
+{
+    Gasto novoGasto;
+
+    novoGasto.id = id;
+    std::getline(std::cin, novoGasto.descricao);
+    std::cin >> novoGasto.valor;
+
+    return novoGasto;
+}
+
+void listarGastos(const std::vector<Gasto> &listaGasto)
+{
+    for (const Gasto &gasto : listaGasto)
+    {
+        std::cout <<
+    }
 }
