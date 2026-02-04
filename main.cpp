@@ -9,7 +9,7 @@ void converterTemperatura();
 void jogoVinteUm();
 void partidaVinteUm();
 void controleDeGastos();
-void cinHelp(); // caso cin.fail
+void cinHelp(); // caso cin.fail()
 
 int main()
 {
@@ -338,7 +338,7 @@ void partidaVinteUm()
 
     do
     {
-        if (enabler == true)
+        if (enabler) // enabler == true
         {
             cartaJogador = rand() % 10 + 1;
             deckJogador.push_back(cartaJogador);
@@ -479,6 +479,7 @@ struct Gasto
 
 Gasto registrarGasto(int id);
 void listarGastos(const std::vector<Gasto> &listaGasto);
+void excluirGasto(std::vector<Gasto> &listaGasto);
 
 void controleDeGastos()
 {
@@ -532,10 +533,13 @@ void controleDeGastos()
             std::cout << "Total em gastos: " << gastoTotal << '\n';
             break;
         }
+
         case 4:
-            int idExclusao;
-            std::cout << "Insira o id do gasto que deseja excluir: ";
-            std::cin >> idExclusao;
+            excluirGasto(listaGasto);
+            break;
+
+        default:
+            continue;
         }
 
     } while (true);
@@ -573,6 +577,41 @@ void listarGastos(const std::vector<Gasto> &listaGasto)
         std::cout << "Id: " << gasto.id << '\n'
                   << "Descricao: " << gasto.descricao << '\n'
                   << "Valor: " << gasto.valor << "\n\n";
+    }
+}
+
+void excluirGasto(std::vector<Gasto> &listaGasto)
+{
+    int idExclusao;
+    do
+    {
+        std::cout << "Insira o id do gasto que deseja excluir: ";
+        std::cin >> idExclusao;
+
+        if (!std::cin.fail())
+        {
+            break;
+        }
+        cinHelp();
+
+    } while (true);
+
+    bool encontrado = false;
+    for (auto i = listaGasto.begin(); i != listaGasto.end();)
+    {
+        if (i->id == idExclusao)
+        {
+            i = listaGasto.erase(i);
+            encontrado = true;
+        }
+        else
+        {
+            ++i;
+        }
+    }
+    if (!encontrado)
+    {
+        std::cout << "O id inserido nao existe\n";
     }
 }
 
