@@ -11,7 +11,7 @@ void converterTemperatura();
 void jogoVinteUm();
 void partidaVinteUm();
 void controleDeGastos();
-bool ehNumero(const std::string ex); // retorna se o usuario inseriu um numero ou se teve char no meio
+bool ehNumero(const std::string ex); // retorna se o usuario inseriu um numero ou se tem char
 
 int main()
 {
@@ -29,7 +29,7 @@ int main()
 
         std::cin >> entrada;
 
-        if (!ehNumero(entrada))
+        if (!ehNumero(entrada) || entrada.size() != 1)
         {
             continue;
         }
@@ -242,7 +242,7 @@ void converterTemperatura()
 
         std::cin >> entrada;
 
-        if (!ehNumero(entrada))
+        if (!ehNumero(entrada) || entrada.size() != 1)
         {
             continue;
         }
@@ -339,7 +339,7 @@ void jogoVinteUm()
 
         std::cin >> entrada;
 
-        if (!ehNumero(entrada))
+        if (!ehNumero(entrada) || entrada.size() != 1)
         {
             continue;
         }
@@ -423,8 +423,7 @@ void partidaVinteUm()
 
         if (soma > 21)
         {
-            std::cout << "Jogador: "
-                      << soma << "\nPerdeu!\n";
+            std::cout << "Jogador: " << soma << "\nPerdeu!\n";
             return;
         }
 
@@ -444,7 +443,7 @@ void partidaVinteUm()
 
             std::cin >> entrada;
 
-            if (!ehNumero(entrada))
+            if (!ehNumero(entrada) || entrada.size() != 1)
             {
                 continue;
             }
@@ -541,7 +540,7 @@ void controleDeGastos()
 
         std::cin >> entrada;
 
-        if (!ehNumero(entrada))
+        if (!ehNumero(entrada) || entrada.size() != 1)
         {
             continue;
         }
