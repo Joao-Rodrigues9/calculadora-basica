@@ -70,13 +70,19 @@ void calculadora()
     double valor = iniciarCalc();
     printarMenuCalc(valor);
 
-    char escolha;
+    std::string escolha;
 
     do
     {
         std::cin >> escolha;
 
-        switch (escolha)
+        if (escolha.size() != 1)
+        {
+            printarMenuCalc(valor);
+            continue;
+        }
+
+        switch (escolha[0])
         {
         case '+':
         {
