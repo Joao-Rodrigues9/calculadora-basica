@@ -1,5 +1,2 @@
-Projeto de menu interativo.
-Atualmente possui as tarefas:
-Calculadora
-Conversor de Temperatura
-Jogo 21
+Projeto de menu interativo, atualmente possui as tarefas: calculadora, conversor de temperatura, jogo 21, controle de gastos.
+
