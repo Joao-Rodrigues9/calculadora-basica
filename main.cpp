@@ -16,6 +16,7 @@ bool ehNumero(const std::string ex); // retorna se o usuario inseriu um numero o
 int main()
 {
     std::string entrada;
+
     do
     {
         std::cout << "--------------------\n"
@@ -41,22 +42,17 @@ int main()
         case 1:
             calculadora();
             break;
-
         case 2:
             converterTemperatura();
             break;
-
         case 3:
             jogoVinteUm();
             break;
-
         case 4:
             controleDeGastos();
             break;
-
         case 0:
             return 0;
-
         default:
             continue;
         }
@@ -88,6 +84,7 @@ void calculadora()
         {
             std::string entrada;
             double somador;
+
             do
             {
                 std::cout << "Somar quanto?\n";
@@ -106,11 +103,11 @@ void calculadora()
             printarMenuCalc(valor);
             break;
         }
-
         case '-':
         {
             std::string entrada;
             double subtrador;
+
             do
             {
                 std::cout << "Subtrair quanto?\n";
@@ -129,11 +126,11 @@ void calculadora()
             printarMenuCalc(valor);
             break;
         }
-
         case '*':
         {
             std::string entrada;
             double multiplicador;
+
             do
             {
                 std::cout << "Multiplicar por quanto?\n";
@@ -152,11 +149,11 @@ void calculadora()
             printarMenuCalc(valor);
             break;
         }
-
         case '/':
         {
             std::string entrada;
             double divisor;
+
             do
             {
                 std::cout << "Dividir por quanto?\n";
@@ -175,14 +172,13 @@ void calculadora()
             printarMenuCalc(valor);
             break;
         }
-
         case '0':
             return;
-
         default:
             printarMenuCalc(valor);
             continue;
         }
+
     } while (true);
 }
 
@@ -205,6 +201,7 @@ double iniciarCalc()
             num = stod(entrada);
             return num;
         }
+
     } while (true);
 }
 
@@ -284,7 +281,6 @@ void converterTemperatura()
             {
                 continue;
             }
-
             temperatura = stod(entrada);
             break;
 
@@ -366,38 +362,32 @@ void partidaVinteUm()
     int cartaJogador, cartaPC;
     std::vector<int> deckJogador, deckPC;
     int soma = 0, somaPC = 0;
-    bool enabler = true; // caso o usuario erroneamente insira um char na escolha, vai pra falso e não add mais cartas ao deck do jogador
     srand(time(0));
 
     do
     {
-        if (enabler) // enabler == true
+        cartaJogador = rand() % 10 + 1; // carta inicial e compra
+        deckJogador.push_back(cartaJogador);
+
+        if (deckJogador.size() == 1) // segunda carta inicial do jogador
         {
             cartaJogador = rand() % 10 + 1;
             deckJogador.push_back(cartaJogador);
-
-            if (deckJogador.size() == 1)
-            {
-                cartaJogador = rand() % 10 + 1;
-                deckJogador.push_back(cartaJogador);
-            }
-
-            if (deckPC.size() == 0)
-            {
-                cartaPC = rand() % 10 + 1;
-                deckPC.push_back(cartaPC);
-
-                cartaPC = rand() % 10 + 1;
-                deckPC.push_back(cartaPC);
-            }
-            else if (somaPC <= 16)
-            {
-                cartaPC = rand() % 10 + 1;
-                deckPC.push_back(cartaPC);
-            }
         }
 
-        enabler = true;
+        if (deckPC.size() == 0) // cartas inicias do pc
+        {
+            cartaPC = rand() % 10 + 1;
+            deckPC.push_back(cartaPC);
+
+            cartaPC = rand() % 10 + 1;
+            deckPC.push_back(cartaPC);
+        }
+        else if (somaPC < 17) // pc não pode ter soma de suas cartas < 17, conforme as regras
+        {
+            cartaPC = rand() % 10 + 1;
+            deckPC.push_back(cartaPC);
+        }
 
         std::cout << "-------------------------------\n";
         std::cout << "Suas cartas:";
@@ -449,13 +439,19 @@ void partidaVinteUm()
             }
 
             escolha = stoi(entrada);
+
+            if (escolha > 1 || escolha < 0)
+            {
+                continue;
+            }
+
             break;
 
         } while (true);
 
         if (escolha == 0)
         {
-            while (somaPC <= 16)
+            while (somaPC <= 16) // pc pode comprar depois de você escolher parar, caso necessário
             {
                 cartaPC = rand() % 10 + 1;
                 deckPC.push_back(cartaPC);
@@ -470,10 +466,12 @@ void partidaVinteUm()
 
             std::cout << "-------------------------------\n"
                       << "Cartas do oponente: ";
+
             for (size_t i = 0; i < deckPC.size(); i++)
             {
                 std::cout << "[" << deckPC[i] << "] ";
             }
+
             std::cout << '\n';
 
             if (soma > 21 || (soma <= 21 && somaPC <= 21 && somaPC > soma))
@@ -501,11 +499,7 @@ void partidaVinteUm()
         {
             continue;
         }
-        else
-        {
-            enabler = false;
-            continue;
-        }
+
     } while (true);
 }
 
@@ -552,7 +546,6 @@ void controleDeGastos()
         {
         case 0:
             return;
-
         case 1:
         {
             Gasto temp = registrarGasto(idGasto);
@@ -560,11 +553,9 @@ void controleDeGastos()
             idGasto++;
             break;
         }
-
         case 2:
             listarGastos(listaGasto);
             break;
-
         case 3:
         {
             float gastoTotal = 0;
@@ -575,11 +566,9 @@ void controleDeGastos()
             std::cout << "Total em gastos: " << gastoTotal << '\n';
             break;
         }
-
         case 4:
             excluirGasto(listaGasto);
             break;
-
         default:
             continue;
         }
@@ -628,6 +617,7 @@ void excluirGasto(std::vector<Gasto> &listaGasto)
 {
     std::string entrada;
     int idExclusao;
+
     do
     {
         std::cout << "Insira o id do gasto que deseja excluir: ";
@@ -656,6 +646,7 @@ void excluirGasto(std::vector<Gasto> &listaGasto)
             ++i;
         }
     }
+
     if (!encontrado)
     {
         std::cout << "O id inserido nao existe\n";
