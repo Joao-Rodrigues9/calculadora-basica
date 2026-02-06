@@ -11,7 +11,8 @@ void converterTemperatura();
 void jogoVinteUm();
 void partidaVinteUm();
 void controleDeGastos();
-bool ehNumero(const std::string ex); // retorna se o usuario inseriu um numero ou se tem char
+bool ehNumero(const std::string &ex); // retorna se o usuario inseriu um numero ou se tem char
+bool ehDouble(const std::string &ex); // ehNumero adaptado para valores double e negativo
 
 int main()
 {
@@ -90,7 +91,7 @@ void calculadora()
                 std::cout << "Somar quanto?\n";
                 std::cin >> entrada;
 
-                if (!ehNumero(entrada))
+                if (!ehDouble(entrada))
                 {
                     continue;
                 }
@@ -113,7 +114,7 @@ void calculadora()
                 std::cout << "Subtrair quanto?\n";
                 std::cin >> entrada;
 
-                if (!ehNumero(entrada))
+                if (!ehDouble(entrada))
                 {
                     continue;
                 }
@@ -136,7 +137,7 @@ void calculadora()
                 std::cout << "Multiplicar por quanto?\n";
                 std::cin >> entrada;
 
-                if (!ehNumero(entrada))
+                if (!ehDouble(entrada))
                 {
                     continue;
                 }
@@ -159,7 +160,7 @@ void calculadora()
                 std::cout << "Dividir por quanto?\n";
                 std::cin >> entrada;
 
-                if (!ehNumero(entrada))
+                if (!ehDouble(entrada))
                 {
                     continue;
                 }
@@ -192,7 +193,7 @@ double iniciarCalc()
         std::cout << "Coloque seu numero de entrada:\n";
         std::cin >> entrada;
 
-        if (!ehNumero(entrada))
+        if (!ehDouble(entrada))
         {
             continue;
         }
@@ -277,7 +278,7 @@ void converterTemperatura()
             std::cout << "Informe a temperatura de entrada: ";
             std::cin >> entrada;
 
-            if (!ehNumero(entrada))
+            if (!ehDouble(entrada))
             {
                 continue;
             }
@@ -393,7 +394,7 @@ void partidaVinteUm()
         std::cout << "Suas cartas:";
 
         soma = 0;
-        for (size_t i = 0; i < deckJogador.size(); i++)
+        for (size_t i = 0; i < deckJogador.size(); ++i)
         {
             std::cout << "[" << deckJogador[i] << "] ";
             soma += deckJogador[i];
@@ -403,7 +404,7 @@ void partidaVinteUm()
         std::cout << "Soma: " << soma << "\n\n";
 
         std::cout << "Cartas do oponente: [" << deckPC[0] << "] ";
-        for (size_t i = 0; i < deckPC.size() - 1; i++)
+        for (size_t i = 0; i < deckPC.size() - 1; ++i)
         {
             std::cout << "[?] ";
         }
@@ -418,7 +419,7 @@ void partidaVinteUm()
         }
 
         somaPC = 0;
-        for (size_t i = 0; i < deckPC.size(); i++)
+        for (size_t i = 0; i < deckPC.size(); ++i)
         {
             somaPC += deckPC[i];
         }
@@ -459,7 +460,7 @@ void partidaVinteUm()
             }
 
             somaPC = 0;
-            for (size_t i = 0; i < deckPC.size(); i++)
+            for (size_t i = 0; i < deckPC.size(); ++i)
             {
                 somaPC += deckPC[i];
             }
@@ -467,7 +468,7 @@ void partidaVinteUm()
             std::cout << "-------------------------------\n"
                       << "Cartas do oponente: ";
 
-            for (size_t i = 0; i < deckPC.size(); i++)
+            for (size_t i = 0; i < deckPC.size(); ++i)
             {
                 std::cout << "[" << deckPC[i] << "] ";
             }
@@ -591,7 +592,7 @@ Gasto registrarGasto(int id)
         std::cout << "Insira o valor: ";
         std::cin >> entrada;
 
-        if (!ehNumero(entrada))
+        if (!ehDouble(entrada))
         {
             continue;
         }
@@ -653,7 +654,7 @@ void excluirGasto(std::vector<Gasto> &listaGasto)
     }
 }
 
-bool ehNumero(const std::string ex)
+bool ehNumero(const std::string &ex)
 {
     for (unsigned char c : ex)
     {
@@ -663,4 +664,41 @@ bool ehNumero(const std::string ex)
         }
     }
     return true;
+}
+
+bool ehDouble(const std::string &ex)
+{
+    bool temDecimal = false;
+    bool temDigito = false;
+    int i = 0;
+
+    for (unsigned char c : ex)
+    {
+        if (i == 0 && c == '-') // permite numero negativo
+        {
+            ++i;
+            continue;
+        }
+
+        if (c == '.')
+        {
+            if (temDecimal)
+            {
+                return false; // só um ponto permitido
+            }
+
+            temDecimal = true;
+            ++i;
+            continue;
+        }
+
+        if (!std::isdigit(c))
+        {
+            return false;
+        }
+
+        temDigito = true;
+        ++i;
+    }
+    return temDigito;
 }
