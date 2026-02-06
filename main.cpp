@@ -449,6 +449,7 @@ void partidaVinteUm()
             }
 
             escolha = stoi(entrada);
+            break;
 
         } while (true);
 
